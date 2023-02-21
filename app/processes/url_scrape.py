@@ -1,7 +1,7 @@
 
 from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
-import numpy as np
+from itertools import chain
 
 
 # These are the urls for all directives in HLS
@@ -25,7 +25,7 @@ class URLScrape:
             print(root)
             self.staff.append(self.get_staff_spider(root))
 
-        self.all_staff = np.array(self.staff).flatten()
+        self.all_staff = list(chain.from_iterable(self.staff))
 
     def get_soup_from_url(self, url):
         req = Request(url)
