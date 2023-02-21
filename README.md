@@ -1,4 +1,4 @@
-# django-docker-compose-deployment
+# hls-staff-search
 
 This is a template dockerised Django project configured for use with:
 
@@ -13,7 +13,7 @@ Guidance on build for both local development and production (Amazon AWS EC2) bel
 ### Step 1. Clone repo
 
 ```bash
-git clone git@github.com:rtreharne/django-docker-compose-deployment.git
+git clone git@github.com:rtreharne/hls-staff-search.git
 ```
 
 If you need to configure your ssh key then read <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account" target="_blank">this</a>.
@@ -50,9 +50,9 @@ docker-compose run --rm app sh -c "python manage.py createsuperuser"
 ```
 Run `docker-compose up app` again and navigate to `/admin` to login to Django admin.
 
-### Step 5 - Make sure your beat scheduler is running
+### Step 5 - Make sure your beat scheduler is running (if required)
 
-This command creates a new container to run in the background.
+This command creates a new container to run in the background if you want to run scheduled tasks.
 
 ```bash
 docker-compose run -d --rm app sh -c "celery -A app beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler"
@@ -62,19 +62,7 @@ docker-compose run -d --rm app sh -c "celery -A app beat -l INFO --scheduler dja
 
 Develop your app locally. Your changes should be reflected on your local server
 
-### Step 6 - Test deployment locally
-
-```bash
-docker-compose -f docker-compose-deploy.yml build
-```
-```bash
-docker-compose -f docker-compose-deploy.yml run -d --rm app sh -c "celery -A app beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler"
-```
-```bash
-docker-compose -f docker-compose-deploy.yml up
-```
-
-### Step 7 - Deploy to AWS EC2
+### Step 6 - Deploy to AWS EC2
 
 Clone this repo and push to new GitHub repository.
 
@@ -135,7 +123,7 @@ Go to your GitHub repo's Settings/Deploy keys. Create a new deploy key and copy 
 
 Clone the repo using the SSH URL.
 ```bash
-git clone git@github.com:rtreharne/django-docker-compose-deployment.git
+git clone git@github.com:<github_username>/hls-staff-search.git
 ```
 
 cd into the project directory.

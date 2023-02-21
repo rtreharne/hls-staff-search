@@ -48,10 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_celery_beat',
-    'core',
-    'accounts',
-    'logs',
     'crispy_forms',
+    
 ]
 
 MIDDLEWARE = [
