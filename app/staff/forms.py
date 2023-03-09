@@ -2,7 +2,10 @@ from django import forms
 from staff.models import Department
 
 departments = Department.objects.all().order_by('name')
-department_list = [(x.name, x.name) for x in departments]
+try:
+    department_list = [(x.name, x.name) for x in departments]
+except:
+    department_list = []
 
 class SearchForm(forms.Form):
     CHOICES = [("All Departments", "All Departments"),
